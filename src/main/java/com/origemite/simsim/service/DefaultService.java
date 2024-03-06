@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Stack;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -29,5 +31,44 @@ public class DefaultService {
         log.info("{}", new ObjectMapper().writeValueAsString(preSum[2]));
         log.info("{}", new ObjectMapper().writeValueAsString(preSum[4] - preSum[2 - 1]));
 
+    }
+
+    //stack
+    public void defa2(String s) {
+        String answer = "";
+        Stack<String> st = new Stack<>();
+        for (Character x : s.toCharArray()) {
+            if (x == ')') {
+                String tmp = "";
+                while (!st.empty()) {
+                    String c = st.pop();
+                    log.info(c);
+                    if (c.equals("(")) {
+                        String num = "";
+                        while (!st.empty() && Character.isDigit(st.peek().charAt(0))) {
+                            num = st.pop() + num;
+                        }
+                        String res = "";
+                        int cnt = 0;
+                        if (num.equals("")) cnt = 1;
+                        else cnt = Integer.parseInt(num);
+                        for (int i = 0; i < cnt; i++) res += tmp;
+                        st.push(res);
+
+                        break;
+                    }
+                    tmp = c + tmp;
+                }
+            } else {
+                st.push(String.valueOf(x));
+                log.info(st.peek());
+            }
+        }
+        for (String x : st) answer += x;
+        log.info(answer);
+    }
+
+    //graph
+    public void defa20000(int[][] input) {
     }
 }

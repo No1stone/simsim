@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.apache.coyote.http11.Constants.a;
+
 @RestController
 @RequestMapping("/defa")
 @Slf4j
@@ -21,4 +23,14 @@ public class DefaultCont {
         defaultService.defa1(input);
     }
 
+    @GetMapping("/2")
+    public void defa2() throws JsonProcessingException {
+        String s = "2(a2(abc))ef";
+        defaultService.defa2(s);
+    }
+
+    public void defa20000() throws JsonProcessingException {
+        int[][] input = {{0, 1, 10}, {1, 2, 20}, {0, 2, 70}, {0, 3, 70}, {0, 3, 100}, {1, 3, 80}, {2, 3, 10}, {2, 4, 30}, {3, 4, 10}};
+        defaultService.defa20000(input);
+    }
 }
